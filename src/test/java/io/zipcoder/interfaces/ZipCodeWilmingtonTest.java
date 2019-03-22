@@ -7,7 +7,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class ZipCodeWilmingtonTest {
-    Instructor instructor = new Instructor(1L, "Pie");
+    Educator instructor = Educator.NHU;
     Student student = new Student(1L,"Apple");
     Student student1 = new Student(2L,"Pumpkin");
     Student student2 = new Student(3L, "Cheese");
@@ -16,14 +16,22 @@ public class ZipCodeWilmingtonTest {
 
     @Test
     public void hostLecture() {
-        Student[] learners = students.getStudents();
+        students.removeAll();
+        students.add(student);
         code.hostLecture(instructor, 12);
-        Double expected = 3.0;
+        Double expected = 12.0;
 
-        for (int i = 0; i < learners.length; i++) {
-            Double actual = learners[i].getTotalStudyTime();
-            Assert.assertEquals(expected, actual);
-        }
+        Assert.assertEquals(expected, student.getTotalStudyTime());
     }
 
+    @Test
+    public void hostLectureForId() {
+        Instructor instructor = Instructors.getInstance().getArray()[0];
+        students.removeAll();
+        students.add(student);
+        code.hostLecture(instructor.getId(), 12);
+        Double expected = 12.0;
+
+        Assert.assertEquals(expected, student.getTotalStudyTime());
+    }
 }

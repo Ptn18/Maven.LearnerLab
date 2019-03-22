@@ -8,14 +8,15 @@ import static org.junit.Assert.*;
 
 public class PeopleTest {
 
-    Person person = new Person(1L,"Bailey");
-    People people = new People();
+    Person person = new Person(11023400L,"Bailey");
+    People people = Students.getInstance();
 
     @Test
     public void addTest() {
-    //when
+        int expectedCount = people.getCount() + 1;
+
+        //when
         people.add(person);
-        int expectedCount = 1;
         int actual = people.getCount();
         Assert.assertEquals(expectedCount,actual);
     }
@@ -23,22 +24,22 @@ public class PeopleTest {
     @Test
     public void findByIdTest() {
         people.add(person);
-        Assert.assertEquals(person, people.findById(1L));
+        Assert.assertEquals(person, people.findById(person.getId()));
     }
     @Test
     public void removeTest() {
         people.add(person);
+        int expectedCount = people.getCount() -1;
         people.remove(person);
-        int expected = 0;
         int actual = people.getCount();
-        Assert.assertEquals(expected,actual);
+        Assert.assertEquals(expectedCount,actual);
     }
 
     @Test
     public void removeByIdTest() {
+        int expected = people.getCount();
         people.add(person);
         people.remove(person.getId());
-        int expected = 0;
         int actual = people.getCount();
         Assert.assertEquals(expected,actual);
     }

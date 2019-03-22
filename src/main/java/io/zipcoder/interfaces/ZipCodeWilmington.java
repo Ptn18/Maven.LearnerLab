@@ -8,12 +8,11 @@ public final class ZipCodeWilmington {
         this.students= students;
     }
 
-    public void hostLecture(Teacher teacher, double numberOfHours){
-        teacher.lecture(students.getStudents(), numberOfHours);
+    public void hostLecture(Educator teacher, double numberOfHours){
+        teacher.lecture(students.getArray(), numberOfHours);
     }
     public void hostLecture(Long id, double numberOfHours){
-        Instructor instruct = (Instructor) instructors.findById(id);
-        hostLecture(instruct,numberOfHours);
-//        instruct.lecture(students.getStudents(), numberOfHours);
+        Teacher teacher = instructors.findById(id);
+        teacher.lecture(students.getArray(), numberOfHours);
     }
 }
